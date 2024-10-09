@@ -70,10 +70,11 @@
         showItem(currentIndex);
 
         setInterval(() => {
+            const mainItem = items[currentIndex].querySelector('.main-item');
+            mainItem.style.opacity = 0; 
             currentIndex = (currentIndex + 1) % totalItems; 
             showItem(currentIndex);
-            const mainItem = items[index].querySelector('.main-item');
-            mainItem.style.opacity = 0; 
+           
         }, 15000); 
     </script>
 
