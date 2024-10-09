@@ -6,6 +6,30 @@ body {
 }
 
 .feed-item {
+    display: none;
+}
+
+@keyframes bg-slide {
+    from {
+        background-color: rgba(0, 0, 0, 0.5);
+        transform: translateX(100%);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0);
+        transform: translateX(0%);
+    }
+}
+
+.bg-slide {
+    animation: bg-slide 4s ease;
+}
+
+.main-item {
+    opacity: 0;
+    transition: opacity 3s ease;
+}
+
+.feed-item {
     width: 100%;
     margin-left: auto;
     margin-right: auto;

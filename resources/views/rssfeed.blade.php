@@ -6,31 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Feed</title>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <style>
-        .feed-item {
-            display: none; 
-        }
-
-        @keyframes bg-slide {
-            from {
-                background-color: rgba(0, 0, 0, 0.5);
-                transform: translateX(100%); 
-            }
-            to {
-                background-color: rgba(0, 0, 0, 0);
-                transform: translateX(0%); 
-            }
-        }
-
-        .bg-slide {
-            animation: bg-slide 4s ease; 
-        }
-
-        .main-item {
-            opacity: 0; 
-            transition: opacity 4s ease; 
-        }
-    </style>
+    {{-- <style>
+       
+    </style> --}}
 </head>
 <body>
    
@@ -85,7 +63,7 @@
 
             setTimeout(() => {
                 mainItem.style.opacity = 1; 
-            }, 4000);
+            }, 3000);
 
         }
 
@@ -94,6 +72,8 @@
         setInterval(() => {
             currentIndex = (currentIndex + 1) % totalItems; 
             showItem(currentIndex);
+            const mainItem = items[index].querySelector('.main-item');
+            mainItem.style.opacity = 0; 
         }, 15000); 
     </script>
 
