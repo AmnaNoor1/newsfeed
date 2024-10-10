@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    /* font-family: Arial, sans-serif; */
     box-sizing: border-box;
 }
 
@@ -51,12 +51,32 @@ body {
 }
 
 .time-box {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     color: white;
-    padding: 16px 0px;
+    padding: 16px 20px;
     margin: 3px;
+    position: relative;
+}
+
+.time-box .channel {
     font-size: 1.25rem;
     font-weight: 500;
+}
+
+.logo img {
+    width: 15%;
+    height: auto;
+    padding: 0px 2px;
+}
+
+.time-box .time {
+    font-size: 1rem;
+    font-weight: 300;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
 }
 
 .slider {
@@ -107,6 +127,7 @@ body {
 
     animation: content-slide 5s ease-out forwards;
     animation-delay: 3s;
+    max-width: 40%;
 }
 
 @keyframes content-slide {
@@ -135,11 +156,17 @@ body {
 
 .image {
     width: 60%;
+    max-width: 60%;
     height: auto;
     display: flex;
     align-items: center;
     animation: image-slide 5s ease-out forwards;
     animation-delay: 3s;
+}
+.image img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 @keyframes image-slide {
@@ -179,6 +206,7 @@ body {
 
     .image img {
         width: 100%;
+        max-width: 100%;
         object-fit: cover;
         /* animation: image-slide 5s ease-out forwards; */
     }
@@ -199,10 +227,20 @@ body {
     }
     .content {
         margin: 2px 60px;
+        max-width: 100%;
     }
 }
 
 @media (max-width: 600px) {
+    .time-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .time-box .time {
+        position: relative;
+    }
+
     .content p {
         font-size: 1rem;
         font-weight: 500;
@@ -216,5 +254,19 @@ body {
     .content {
         max-height: 50vh;
         padding: 2px;
+    }
+}
+
+@media (max-width: 700px) {
+    .time-box .channel {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        width: 10%;
+    }
+
+    .time-box .time {
+        font-size: 1rem;
     }
 }

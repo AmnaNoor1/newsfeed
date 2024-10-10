@@ -15,18 +15,24 @@ class RssFeedController extends Controller
             'https://www.standaard.be/rss/section/eb1a6433-ca3f-4a3b-ab48-a81a5fb8f6e2', //working
             'https://www.gva.be/rss/section/4DFF3E33-6C32-4E60-803C-A2AC00EDE26C', //working
             'http://feeds.nieuwsblad.be/nieuwsblad/sport/autosport', //working
-            // 'https://www.tijd.be/rss/politiek_economie.xml', //no image
+            'https://www.tijd.be/rss/politiek_economie.xml', //no image
             'http://feeds.nieuwsblad.be/economie/home', //working
             'https://www.hbvl.be/rss/section/3D61D4A0-88CE-44E9-BCE0-A2AD00AD7D2E', 
         ];
 
-        $feedItems = [];
+        $feeds = [];
 
         foreach ($urls as $url) {
             $response = $client->get($url);
             $rssContent = $response->getBody()->getContents();
 
             $rss = simplexml_load_string($rssContent);
+
+            // Fetch channel name and logo
+            $channelName = (string) $rss->channel->title;
+            $channelLogo = isset($rss->channel->image->url) ? (string) $rss->channel->image->url : null;
+
+            $feedItems = [];
 
             foreach ($rss->channel->item as $item) {
                 $feedItems[] = [
@@ -37,8 +43,15 @@ class RssFeedController extends Controller
                     'image' => isset($item->enclosure['url']) ? (string) $item->enclosure['url'] : null,
                 ];
             }
+
+            // Add the feed info including channel name and logo
+            $feeds[] = [
+                'channelName' => $channelName,
+                'channelLogo' => $channelLogo,
+                'items' => $feedItems
+            ];
         }
 
-        return view('rssfeed', ['feedItems' => $feedItems]);
+        return view('rssfeed', ['feeds' => $feeds]);
     }
 }
